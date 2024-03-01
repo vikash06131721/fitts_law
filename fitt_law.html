@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Startup Screen Example</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+  .startup-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
+  .main-content {
+    display: none;
+    padding: 20px;
+  }
+
+  #pic2-container {
+      width: 100px;
+      height: 70px;
+      border: 1px solid blue;
+      float: left;
+      margin-top: 50px;
+      position: relative;
+      transform: translateX(10px);
+      background-color: yellow;
+
+      }
+  #pic3-container {
+      width: 100px;
+      height: 70px;
+      border: 1px solid blue;
+      float: left;
+      margin-top: 50px;
+      position: relative;
+      transform: translateX(1000px);
+      background-color: red;
+
+      }
+  #pic4-container {
+      width: 100px;
+      height: 70px;
+      border: 1px solid blue;
+      float: left;
+      margin-top: 100px;
+      position: relative;
+      background-color: blue;
+      transform: translateX(400px);
+
+      }
+  #pic5-container {
+      width: 100px;
+      height: 70px;
+      border: 1px solid blue;
+      float: left;
+      margin-top: 200px;
+      position: relative;
+      background-color: orange;
+      transform: translateX(700px);
+
+      }
+  #pic6-container {
+          width: 100px;
+          height: 70px;
+          border: 1px solid blue;
+          float: left;
+          margin-top: 300px;
+          position: relative;
+          background-color: teal;
+          transform: translateX(500px);
+
+          }
+
+  #pic7-container {
+          width: 100px;
+          height: 70px;
+          border: 1px solid blue;
+          float: left;
+          margin-top: 500px;
+          position: relative;
+          background-color: lightgoldenrodyellow;
+          transform: translateX(800px);
+
+          }
+
+</style>
+<script src="https://d3js.org/d3.v6.js"></script>
+<script src="click.js"></script>
+
+</head>
+<body>
+
+
+
+<div id="startupScreen" class="startup-screen">
+  Click to start
+</div>
+
+<div id="mainContent" class="main-content">
+  <h1>Welcome To Fitts Law Trials</h1>
+  <div id="pic2-container">
+      
+  </div>
+  <div id="pic3-container">
+      
+  </div>
+  <div id="pic4-container">
+      
+  </div>
+  <div id="pic5-container">
+      
+  </div>
+  <div id="pic6-container">
+      
+  </div>
+  <div id="pic7-container">
+      
+  </div>
+  <p id="trialText">Trial 1.</p>
+  <div id="backButton">Back</div>
+</div>
+
+<script>
+
+    let trialData = [];
+    let clickTimePic2 = null;
+    let clickTimePic3 = null;
+    let clickTimePic4 = null;
+    let clickTimePic5 = null;
+    let clickTimePic6 = null;
+    let clickTimePic7 = null;
+
+
+
+
+    function calculateTimeDifference() {
+      if (clickTimePic2 && clickTimePic3) {
+        let timeDiff = Math.abs(clickTimePic3 - clickTimePic2); // Calculate absolute difference
+        console.log("Time difference between clicks (milliseconds):", timeDiff);
+        // Reset the timestamps for the next trial
+        clickTimePic2 = null;
+        clickTimePic3 = null;
+      }
+    }
+    let trialNumber = localStorage.getItem('trialNumber') ? parseInt(localStorage.getItem('trialNumber'), 10) : 1;
+    console.log(trialNumber);
+    document.getElementById('startupScreen').addEventListener('click', function() {
+    document.getElementById('startupScreen').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    // document.getElementById('welcomeTitle').innerText = 'Welcome To Trial ' + trialNumber + '!';
+    document.getElementById('trialText').innerText = 'Trial ' + trialNumber + '.';
+    if (trialNumber == 1) {
+      document.getElementById('pic2-container').style.display = 'block';
+      document.getElementById('pic3-container').style.display = 'block';
+      document.getElementById('pic4-container').style.display = 'none';
+      document.getElementById('pic5-container').style.display = 'none';
+      document.getElementById('pic6-container').style.display = 'none';
+      document.getElementById('pic7-container').style.display = 'none';
+      trialData.length=0;
+
+      document.getElementById('pic2-container').addEventListener('click', function() {
+        clickTimePic2 = Date.now(); // Record the current time in milliseconds
+        calculateTimeDifference(); // Attempt to calculate time difference
+
+        });
+
+    // const pic2PositionX = 10; // Fixed position of pic2-container in pixels
+    // let pic3PositionX = 0; // This will store the current position of pic3-container
+    click_random('pic3-container');
+
+    } else if (trialNumber==2) {
+      document.getElementById('pic2-container').style.display = 'block';
+      document.getElementById('pic3-container').style.display = 'block';
+      document.getElementById('pic4-container').style.display = 'block';
+      document.getElementById('pic5-container').style.display = 'none';
+      document.getElementById('pic6-container').style.display = 'none';
+      document.getElementById('pic7-container').style.display = 'none';
+
+
+      trialData.length=0;
+
+      document.getElementById('pic2-container').addEventListener('click', function() {
+        clickTimePic2 = Date.now(); // Record the current time in milliseconds
+        calculateTimeDifference(); // Attempt to calculate time difference
+
+        });
+      pic4PositionX=0
+      document.getElementById('pic4-container').addEventListener('click', function() {
+        clickTimePic4 = Date.now(); // Record the current time in milliseconds
+        calculateTimeDifference(); // Attempt to calculate time difference
+        const positions = [700, 600, 500];
+        let randomPosition = positions[Math.floor(Math.random() * positions.length)];
+        pic4PositionX = randomPosition;
+        this.style.transform = `translateX(${randomPosition}px)`;
+
+        });
+      click_random2("pic3-container",pic4PositionX);
+
+    }
+    else if (trialNumber==3){
+        document.getElementById('pic2-container').style.display = 'block';
+        document.getElementById('pic3-container').style.display = 'block';
+        document.getElementById('pic4-container').style.display = 'block';
+        document.getElementById('pic5-container').style.display = 'block';
+        document.getElementById('pic6-container').style.display = 'none';
+        document.getElementById('pic7-container').style.display = 'none';
+
+
+        trialData.length=0;
+        document.getElementById('pic2-container').addEventListener('click', function() {
+            clickTimePic2 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+        });
+
+        pic5PositionX=0
+        document.getElementById('pic5-container').addEventListener('click', function() {
+            clickTimePic5 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+            const positions = [900, 280, 820];
+            let randomPosition = positions[Math.floor(Math.random() * positions.length)];
+            pic5PositionX = randomPosition;
+            this.style.transform = `translateX(${randomPosition}px)`;
+
+            });
+        document.getElementById('pic4-container').addEventListener('click', function() {
+            clickTimePic4 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+            const positions = [100, 200, 520];
+            let randomPosition = positions[Math.floor(Math.random() * positions.length)];
+            pic4PositionX = randomPosition;
+            this.style.transform = `translateX(${randomPosition}px)`;
+
+            });
+        click_random3("pic3-container",pic5PositionX);
+
+    }
+    else if (trialNumber==4){
+        document.getElementById('pic2-container').style.display = 'block';
+        document.getElementById('pic3-container').style.display = 'block';
+        document.getElementById('pic4-container').style.display = 'block';
+        document.getElementById('pic5-container').style.display = 'block';
+        document.getElementById('pic6-container').style.display = 'block';
+        document.getElementById('pic7-container').style.display = 'none';
+
+
+        trialData.length=0;
+        document.getElementById('pic2-container').addEventListener('click', function() {
+            clickTimePic2 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+        });
+
+        pic6PositionX=0
+        document.getElementById('pic6-container').addEventListener('click', function() {
+            clickTimePic6 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+            const positions = [900, 280, 820];
+            let randomPosition = positions[Math.floor(Math.random() * positions.length)];
+            pic6PositionX = randomPosition;
+            this.style.transform = `translateX(${randomPosition}px)`;
+
+            });
+        document.getElementById('pic5-container').addEventListener('click', function() {
+            clickTimePic5 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+
+            });
+        document.getElementById('pic4-container').addEventListener('click', function() {
+            clickTimePic4 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+            const positions = [100, 200, 520];
+            let randomPosition = positions[Math.floor(Math.random() * positions.length)];
+            pic4PositionX = randomPosition;
+            this.style.transform = `translateX(${randomPosition}px)`;
+
+            });
+        click_random4("pic3-container",pic6PositionX)
+
+
+    }
+    else if (trialNumber==5){
+        document.getElementById('pic2-container').style.display = 'block';
+        document.getElementById('pic3-container').style.display = 'block';
+        document.getElementById('pic4-container').style.display = 'block';
+        document.getElementById('pic5-container').style.display = 'block';
+        document.getElementById('pic6-container').style.display = 'block';
+        document.getElementById('pic7-container').style.display = 'block';
+
+        trialData.length=0;
+        document.getElementById('pic2-container').addEventListener('click', function() {
+            clickTimePic2 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+        });
+
+        pic7PositionX=0
+        document.getElementById('pic7-container').addEventListener('click', function() {
+            clickTimePic7 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+            const positions = [900, 280, 820];
+            let randomPosition = positions[Math.floor(Math.random() * positions.length)];
+            pic7PositionX = randomPosition;
+            this.style.transform = `translateX(${randomPosition}px)`;
+
+            });
+        document.getElementById('pic5-container').addEventListener('click', function() {
+            clickTimePic5 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+
+            });
+        document.getElementById('pic6-container').addEventListener('click', function() {
+            clickTimePic6 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+            const positions = [100, 200, 520];
+            let randomPosition = positions[Math.floor(Math.random() * positions.length)];
+            // pic6PositionX = randomPosition;
+            this.style.transform = `translateX(${randomPosition}px)`;
+
+            });
+        document.getElementById('pic4-container').addEventListener('click', function() {
+            clickTimePic4 = Date.now(); // Record the current time in milliseconds
+            calculateTimeDifference(); // Attempt to calculate time difference
+            const positions = [100, 200, 520];
+            let randomPosition = positions[Math.floor(Math.random() * positions.length)];
+            pic4PositionX = randomPosition;
+            this.style.transform = `translateX(${randomPosition}px)`;
+
+            });
+        click_random5("pic3-container",pic7PositionX)
+
+        
+    }
+    else{
+        document.getElementById('pic2-container').style.display = 'none';
+        document.getElementById('pic3-container').style.display = 'none';
+        document.getElementById('pic4-container').style.display = 'none';
+        document.getElementById('pic5-container').style.display = 'none';
+        document.getElementById('pic6-container').style.display = 'none';
+        document.getElementById('pic7-container').style.display = 'none';
+
+
+    }
+  });
+
+    document.getElementById('backButton').addEventListener('click', function() {
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('startupScreen').style.display = 'flex';
+    trialNumber++;
+    if (trialNumber > 5) {
+        trialNumber = 1; // Reset trial number if it exceeds 10
+    }
+    localStorage.setItem('trialNumber', trialNumber);
+    document.getElementById('startupScreen').innerText = 'Click to start Trial ' + trialNumber;
+  });
+
+
+
+
+
+    
+
+
+</script>
+
+</body>
+</html>
